@@ -125,5 +125,8 @@
 				}
 			}
 		}
-	}
+  },
+  "cli": {
+    "analytics": "f39e34aa-f2fd-4846-ae2c-f14672b9ea3e"
+  }
 }
