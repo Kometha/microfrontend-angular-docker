@@ -1,61 +1,19 @@
-<div class="container mt-5">
-  <h2 class="mb-5 text-center">🛒 Listar Compras</h2>
+<div class="mx-auto w-full max-w-5xl px-4 py-6">
+  <h2 class="mb-8 text-center text-2xl font-bold text-color">🛒 Listar Compras</h2>
 
-  <!-- Curso 1 -->
-  <div class="row align-items-center mb-5">
-    <div class="col-md-6">
-      <h4>Curso Angular Avanzado</h4>
-      <p>
-        Aprende a desarrollar aplicaciones SPA modernas con Angular 19, incluyendo rutas, servicios, componentes reutilizables y arquitectura basada en microfrontends. Ideal para desarrolladores frontend que quieren subir de nivel.
-      </p>
-    </div>
-    <div class="col-md-6 text-center">
-      <img src="/mf-compras/images/angular.svg" alt="Angular" class="img-fluid" style="max-height: 150px;">
-    </div>
-  </div>
-
-  <hr>
-
-  <!-- Curso 2 -->
-  <div class="row align-items-center mb-5 flex-md-row-reverse">
-    <div class="col-md-6">
-      <h4>Curso Kotlin para Android</h4>
-      <p>
-        Domina Kotlin y crea apps modernas para Android con Jetpack Compose, corrutinas y arquitectura MVVM. Este curso es perfecto si deseas desarrollar apps móviles profesionales.
-      </p>
-    </div>
-    <div class="col-md-6 text-center">
-      <img src="/mf-compras/images/Kotlin_Icon.png" alt="Kotlin" class="img-fluid" style="max-height: 150px;">
-    </div>
-  </div>
-
-  <hr>
-
-  <!-- Curso 3 -->
-  <div class="row align-items-center mb-5">
-    <div class="col-md-6">
-      <h4>Curso C# con .NET 8</h4>
-      <p>
-        Aprende a construir aplicaciones robustas con C# y .NET 8: desde APIs RESTful hasta aplicaciones de escritorio. Este curso es ideal para backend developers o desarrolladores que migran desde otras plataformas.
-      </p>
-    </div>
-    <div class="col-md-6 text-center">
-      <img src="/mf-compras/images/Csharp_Logo.png" alt="C#" class="img-fluid" style="max-height: 150px;">
-    </div>
-  </div>
-
-  <hr>
-
-  <!-- Curso 4 -->
-  <div class="row align-items-center mb-5 flex-md-row-reverse">
-    <div class="col-md-6">
-      <h4>Curso Python para Data Science</h4>
-      <p>
-        Aprende Python desde cero orientado a análisis de datos, visualización y machine learning. Usarás herramientas como Pandas, NumPy y Matplotlib. Perfecto para quienes buscan entrar al mundo de la ciencia de datos.
-      </p>
-    </div>
-    <div class="col-md-6 text-center">
-      <img src="/mf-compras/images/Python-logo-notext.svg" alt="Python" class="img-fluid" style="max-height: 150px;">
-    </div>
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+    @for (curso of cursos; track curso.titulo) {
+      <p-card styleClass="h-full">
+        <div class="flex h-full flex-col items-center gap-4 text-center sm:flex-row sm:text-left">
+          <div class="flex h-28 w-28 shrink-0 items-center justify-center rounded-lg bg-primary/5 p-3">
+            <img [src]="curso.imagen" [alt]="curso.alt" class="max-h-20 max-w-full object-contain" />
+          </div>
+          <div>
+            <h3 class="mb-2 text-lg font-semibold text-color">{{ curso.titulo }}</h3>
+            <p class="text-sm text-muted-color">{{ curso.descripcion }}</p>
+          </div>
+        </div>
+      </p-card>
+    }
   </div>
 </div>
