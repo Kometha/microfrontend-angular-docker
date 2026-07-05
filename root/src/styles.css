@@ -22,11 +22,3 @@ body {
   min-height: 100%;
   font-family: var(--font-geist);
 }
-
-/* Cierre del drawer instantáneo: se anula solo la animación de SALIDA del panel
-   y del mask (la de entrada/apertura opaca se conserva). Así al cerrar (X, clic
-   fuera o Esc) se ve la pantalla al instante, sin esperar el fundido de 0.5s. */
-.p-drawer-leave-active,
-.p-overlay-mask-leave-active {
-  animation-duration: 0s !important;
-}
