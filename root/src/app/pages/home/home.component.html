@@ -1,25 +1,53 @@
-<div class="container mt-5 text-center">
-  <h1 class="display-5 fw-bold text-success mb-4">
+<section class="mx-auto max-w-3xl text-center">
+  <h1 class="mb-4 text-4xl font-bold tracking-tight text-color md:text-5xl">
     🧩 Proyecto Microfrontends Angular
   </h1>
-  <p class="lead">
-    Demostración de cómo un <span class="fw-semibold">proyecto raíz</span> puede
-    integrar múltiples
-    <span class="fw-semibold">microfrontends</span> desplegados de forma
-    independiente.
+  <p class="mb-3 text-lg text-muted-color">
+    Demostración de cómo un <span class="font-semibold text-color">proyecto raíz</span>
+    puede integrar múltiples
+    <span class="font-semibold text-color">microfrontends</span> desplegados de
+    forma independiente.
   </p>
-  <p class="mb-4">
-    Navega entre los módulos de <strong>Ventas</strong> y
-    <strong>Compras</strong> usando el menú superior.
+  <p class="text-muted-color">
+    Navega entre los módulos de <strong class="text-color">Ventas</strong> y
+    <strong class="text-color">Compras</strong> usando el menú superior.
   </p>
+</section>
 
-  <hr class="my-5" />
+<section class="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-6 md:grid-cols-2">
+  <p-card>
+    <ng-template #header>
+      <div class="flex h-28 items-center justify-center bg-primary/10 text-5xl">
+        🧾
+      </div>
+    </ng-template>
+    <h3 class="mb-2 text-xl font-semibold text-color">Ventas</h3>
+    <p class="mb-4 text-muted-color">
+      Consulta el listado de ventas con su estado, cuotas y montos.
+    </p>
+    <p-button label="Ir a Ventas" icon="pi pi-arrow-right" iconPos="right" routerLink="/ventas" />
+  </p-card>
 
-  <p class="text-muted small">
-    Este proyecto utiliza <strong>Angular 19</strong>,
-    <strong>Module Federation</strong> y <strong>Bootstrap 5</strong> para
-    demostrar integración de microfrontends.
+  <p-card>
+    <ng-template #header>
+      <div class="flex h-28 items-center justify-center bg-primary/10 text-5xl">
+        🛒
+      </div>
+    </ng-template>
+    <h3 class="mb-2 text-xl font-semibold text-color">Compras</h3>
+    <p class="mb-4 text-muted-color">
+      Explora los cursos disponibles y sus detalles.
+    </p>
+    <p-button label="Ir a Compras" icon="pi pi-arrow-right" iconPos="right" routerLink="/compras" />
+  </p-card>
+</section>
+
+<footer class="mt-16 text-center text-sm text-muted-color">
+  <p>
+    Construido con <strong class="text-color">Angular 21</strong>,
+    <strong class="text-color">Native Federation</strong>,
+    <strong class="text-color">Tailwind CSS</strong> y
+    <strong class="text-color">PrimeNG</strong>.
   </p>
-
-  <p class="mt-5">🔧 by © 2025 · <strong>{{ "javier2315@gmail.com" }}</strong></p>
-</div>
+  <p class="mt-2">🔧 © 2026 · <strong class="text-color">javier2315&#64;gmail.com</strong></p>
+</footer>

@@ -1,28 +1,22 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary px-4">
-  <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">🧩 Microfrontends App</a>
+<p-menubar [model]="items" styleClass="rounded-none border-x-0 border-t-0 px-4 py-2">
+  <ng-template #start>
+    <a
+      routerLink="/"
+      class="mr-6 flex items-center gap-2 text-lg font-bold no-underline text-color"
+    >
+      <span>🧩</span>
+      <span>Microfrontends App</span>
+    </a>
+  </ng-template>
 
-    <div class="collapse navbar-collapse" id="navbarMenus">
-      <ul class="navbar-nav me-auto">
-        <li
-          class="nav-item"
-          [ngClass]="{ active: router.url === '/' }"
-        >
-          <a class="nav-link" routerLink="/">Inicio</a>
-        </li>
-        <li
-          class="nav-item"
-          [ngClass]="{ active: router.url.startsWith('/ventas') }"
-        >
-          <a class="nav-link" routerLink="/ventas">Ventas</a>
-        </li>
-        <li
-          class="nav-item"
-          [ngClass]="{ active: router.url.startsWith('/compras') }"
-        >
-          <a class="nav-link" routerLink="/compras">Compras</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  <ng-template #end>
+    <p-button
+      [icon]="isDark() ? 'pi pi-sun' : 'pi pi-moon'"
+      severity="secondary"
+      [text]="true"
+      [rounded]="true"
+      (onClick)="toggleDarkMode()"
+      ariaLabel="Cambiar tema claro/oscuro"
+    />
+  </ng-template>
+</p-menubar>
