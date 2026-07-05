@@ -1,13 +1,9 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, effect, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DrawerModule } from 'primeng/drawer';
-import { ButtonModule } from 'primeng/button';
-import { AvatarModule } from 'primeng/avatar';
-import { RippleModule } from 'primeng/ripple';
 
 @Component({
   selector: 'app-drawer',
-  imports: [RouterLink, DrawerModule, ButtonModule, AvatarModule, RippleModule],
+  imports: [RouterLink],
   templateUrl: './drawer.component.html',
 })
 export class DrawerComponent {
@@ -16,6 +12,13 @@ export class DrawerComponent {
 
   /** Estado abierto/cerrado del grupo "Ventas". */
   readonly ventasOpen = signal(false);
+
+  constructor() {
+    // Bloquea el scroll del body mientras el drawer está abierto.
+    effect(() => {
+      document.body.classList.toggle('overflow-hidden', this.visible());
+    });
+  }
 
   open(): void {
     this.visible.set(true);
@@ -29,11 +32,6 @@ export class DrawerComponent {
     this.ventasOpen.update((open) => !open);
   }
 
-  /**
-   * Cierre con Esc manejado aquí porque el `closeOnEscape` interno de PrimeNG
-   * oculta el drawer sin emitir `visibleChange`, dejando el signal en `true` y
-   * bloqueando la reapertura. Al cerrar por nuestro propio signal queda sincronizado.
-   */
   @HostListener('document:keydown.escape')
   onEscape(): void {
     if (this.visible()) {
