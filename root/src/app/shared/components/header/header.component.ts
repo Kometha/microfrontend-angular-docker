@@ -1,21 +1,18 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
+import { DrawerComponent } from '../drawer/drawer.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, MenubarModule, ButtonModule],
+  imports: [RouterLink, MenubarModule, ButtonModule, DrawerComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  readonly items: MenuItem[] = [
-    { label: 'Inicio', icon: 'pi pi-home', routerLink: '/', routerLinkActiveOptions: { exact: true } },
-    { label: 'Ventas', icon: 'pi pi-shopping-cart', routerLink: '/ventas' },
-    { label: 'Compras', icon: 'pi pi-shopping-bag', routerLink: '/compras' },
-  ];
+  /** Menubar sin ítems horizontales: la navegación vive en el drawer. */
+  readonly items = [];
 
   readonly isDark = signal(false);
 
