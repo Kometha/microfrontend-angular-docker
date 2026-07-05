@@ -30,6 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     providePrimeNG({
+      ripple: true,
       theme: {
         preset: NexoPreset,
         options: {
