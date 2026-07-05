@@ -1,0 +1,108 @@
+<p-button
+  icon="pi pi-bars"
+  [text]="true"
+  [rounded]="true"
+  severity="secondary"
+  (onClick)="open()"
+  ariaLabel="Abrir menú"
+/>
+
+<p-drawer
+  [visible]="visible()"
+  (visibleChange)="visible.set($event)"
+  position="left"
+  [style]="{ width: '18rem' }"
+>
+  <ng-template #headless>
+    <div class="flex h-full flex-col">
+      <!-- Encabezado -->
+      <div class="flex shrink-0 items-center justify-between px-5 pb-2 pt-4">
+        <a
+          routerLink="/"
+          (click)="onNavigate()"
+          class="inline-flex items-center gap-2 text-lg font-semibold text-color no-underline"
+        >
+          <span>🧩</span>
+          <span>Microfrontends App</span>
+        </a>
+        <p-button
+          icon="pi pi-times"
+          [text]="true"
+          [rounded]="true"
+          severity="secondary"
+          (onClick)="close()"
+          ariaLabel="Cerrar menú"
+        />
+      </div>
+
+      <!-- Navegación -->
+      <div class="overflow-y-auto">
+        <ul class="m-0 list-none p-3">
+          <!-- Inicio -->
+          <li>
+            <a
+              pRipple
+              routerLink="/"
+              (click)="onNavigate()"
+              class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
+            >
+              <i class="pi pi-home mr-2"></i>
+              <span class="text-sm font-medium">Inicio</span>
+            </a>
+          </li>
+
+          <!-- Ventas (padre expandible) -->
+          <li>
+            <a
+              pRipple
+              (click)="toggleVentas()"
+              class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
+            >
+              <i class="pi pi-shopping-cart mr-2"></i>
+              <span class="text-sm font-medium">Ventas</span>
+              <i
+                class="pi pi-chevron-down ml-auto text-xs transition-transform duration-200"
+                [class.rotate-180]="ventasOpen()"
+              ></i>
+            </a>
+            <ul class="m-0 list-none py-0 pl-4 pr-0" [class.hidden]="!ventasOpen()">
+              <li>
+                <a
+                  pRipple
+                  routerLink="/ventas"
+                  (click)="onNavigate()"
+                  class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
+                >
+                  <i class="pi pi-list mr-2"></i>
+                  <span class="text-sm font-medium">Listar Ventas</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Compras -->
+          <li>
+            <a
+              pRipple
+              routerLink="/compras"
+              (click)="onNavigate()"
+              class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
+            >
+              <i class="pi pi-shopping-bag mr-2"></i>
+              <span class="text-sm font-medium">Compras</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-auto">
+        <hr class="mx-3 mb-3 border-t border-surface" />
+        <div class="m-3 flex items-center gap-2 rounded p-3 text-color">
+          <p-avatar label="U" shape="circle" />
+          <span class="text-sm font-bold">Usuario</span>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</p-drawer>
