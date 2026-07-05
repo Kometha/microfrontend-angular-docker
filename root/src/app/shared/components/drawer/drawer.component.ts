@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
@@ -29,8 +29,15 @@ export class DrawerComponent {
     this.ventasOpen.update((open) => !open);
   }
 
-  /** Al navegar desde un enlace, cerramos el drawer. */
-  onNavigate(): void {
-    this.close();
+  /**
+   * Cierre con Esc manejado aquí porque el `closeOnEscape` interno de PrimeNG
+   * oculta el drawer sin emitir `visibleChange`, dejando el signal en `true` y
+   * bloqueando la reapertura. Al cerrar por nuestro propio signal queda sincronizado.
+   */
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.visible()) {
+      this.close();
+    }
   }
 }
