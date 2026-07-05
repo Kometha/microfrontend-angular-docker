@@ -10,6 +10,7 @@
 <p-drawer
   [visible]="visible()"
   (visibleChange)="visible.set($event)"
+  [closeOnEscape]="false"
   position="left"
   [style]="{ width: '18rem' }"
 >
@@ -19,7 +20,6 @@
       <div class="flex shrink-0 items-center justify-between px-5 pb-2 pt-4">
         <a
           routerLink="/"
-          (click)="onNavigate()"
           class="inline-flex items-center gap-2 text-lg font-semibold text-color no-underline"
         >
           <span>🧩</span>
@@ -43,7 +43,6 @@
             <a
               pRipple
               routerLink="/"
-              (click)="onNavigate()"
               class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
             >
               <i class="pi pi-home mr-2"></i>
@@ -70,7 +69,6 @@
                 <a
                   pRipple
                   routerLink="/ventas"
-                  (click)="onNavigate()"
                   class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
                 >
                   <i class="pi pi-list mr-2"></i>
@@ -85,7 +83,6 @@
             <a
               pRipple
               routerLink="/compras"
-              (click)="onNavigate()"
               class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
             >
               <i class="pi pi-shopping-bag mr-2"></i>
