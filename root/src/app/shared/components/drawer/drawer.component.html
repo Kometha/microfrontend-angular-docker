@@ -1,105 +1,117 @@
-<p-button
-  icon="pi pi-bars"
-  [text]="true"
-  [rounded]="true"
-  severity="secondary"
-  (onClick)="open()"
-  ariaLabel="Abrir menú"
-/>
-
-<p-drawer
-  [visible]="visible()"
-  (visibleChange)="visible.set($event)"
-  [closeOnEscape]="false"
-  position="left"
-  [style]="{ width: '18rem' }"
+<button
+  type="button"
+  (click)="open()"
+  aria-label="Abrir menú"
+  class="inline-flex h-10 w-10 items-center justify-center rounded-full border-0 bg-transparent text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
 >
-  <ng-template #headless>
-    <div class="flex h-full flex-col">
-      <!-- Encabezado -->
-      <div class="flex shrink-0 items-center justify-between px-5 pb-2 pt-4">
+  <i class="pi pi-bars"></i>
+</button>
+
+<!-- Backdrop -->
+<div
+  (click)="close()"
+  aria-hidden="true"
+  class="fixed inset-0 z-40 bg-black/50 transition-opacity ease-out"
+  [class.duration-200]="visible()"
+  [class.duration-0]="!visible()"
+  [class.opacity-100]="visible()"
+  [class.opacity-0]="!visible()"
+  [class.pointer-events-none]="!visible()"
+></div>
+
+<!-- Panel -->
+<aside
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú de navegación"
+  [attr.inert]="visible() ? null : ''"
+  class="fixed inset-y-0 left-0 z-50 flex w-72 flex-col bg-surface-0 text-color shadow-xl transition-transform duration-200 ease-out dark:bg-surface-900"
+  [class.translate-x-0]="visible()"
+  [class.-translate-x-full]="!visible()"
+>
+  <!-- Encabezado -->
+  <div class="flex shrink-0 items-center justify-between px-5 pb-2 pt-4">
+    <a
+      routerLink="/"
+      class="inline-flex items-center gap-2 text-lg font-semibold text-color no-underline"
+    >
+      <span>🧩</span>
+      <span>Microfrontends App</span>
+    </a>
+    <button
+      type="button"
+      (click)="close()"
+      aria-label="Cerrar menú"
+      class="inline-flex h-9 w-9 items-center justify-center rounded-full border-0 bg-transparent text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
+    >
+      <i class="pi pi-times"></i>
+    </button>
+  </div>
+
+  <!-- Navegación -->
+  <nav class="overflow-y-auto">
+    <ul class="m-0 list-none p-3">
+      <!-- Inicio -->
+      <li>
         <a
           routerLink="/"
-          class="inline-flex items-center gap-2 text-lg font-semibold text-color no-underline"
+          class="flex cursor-pointer items-center rounded p-3 text-color no-underline transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
         >
-          <span>🧩</span>
-          <span>Microfrontends App</span>
+          <i class="pi pi-home mr-2"></i>
+          <span class="text-sm font-medium">Inicio</span>
         </a>
-        <p-button
-          icon="pi pi-times"
-          [text]="true"
-          [rounded]="true"
-          severity="secondary"
-          (onClick)="close()"
-          ariaLabel="Cerrar menú"
-        />
-      </div>
+      </li>
 
-      <!-- Navegación -->
-      <div class="overflow-y-auto">
-        <ul class="m-0 list-none p-3">
-          <!-- Inicio -->
+      <!-- Ventas (padre expandible) -->
+      <li>
+        <button
+          type="button"
+          (click)="toggleVentas()"
+          class="flex w-full cursor-pointer items-center rounded border-0 bg-transparent p-3 text-left text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
+        >
+          <i class="pi pi-shopping-cart mr-2"></i>
+          <span class="text-sm font-medium">Ventas</span>
+          <i
+            class="pi pi-chevron-down ml-auto text-xs transition-transform duration-200"
+            [class.rotate-180]="ventasOpen()"
+          ></i>
+        </button>
+        <ul class="m-0 list-none py-0 pl-4 pr-0" [class.hidden]="!ventasOpen()">
           <li>
             <a
-              pRipple
-              routerLink="/"
-              class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
+              routerLink="/ventas"
+              class="flex cursor-pointer items-center rounded p-3 text-color no-underline transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
             >
-              <i class="pi pi-home mr-2"></i>
-              <span class="text-sm font-medium">Inicio</span>
-            </a>
-          </li>
-
-          <!-- Ventas (padre expandible) -->
-          <li>
-            <a
-              pRipple
-              (click)="toggleVentas()"
-              class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
-            >
-              <i class="pi pi-shopping-cart mr-2"></i>
-              <span class="text-sm font-medium">Ventas</span>
-              <i
-                class="pi pi-chevron-down ml-auto text-xs transition-transform duration-200"
-                [class.rotate-180]="ventasOpen()"
-              ></i>
-            </a>
-            <ul class="m-0 list-none py-0 pl-4 pr-0" [class.hidden]="!ventasOpen()">
-              <li>
-                <a
-                  pRipple
-                  routerLink="/ventas"
-                  class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
-                >
-                  <i class="pi pi-list mr-2"></i>
-                  <span class="text-sm font-medium">Listar Ventas</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-          <!-- Compras -->
-          <li>
-            <a
-              pRipple
-              routerLink="/compras"
-              class="flex cursor-pointer items-center rounded p-3 text-color transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
-            >
-              <i class="pi pi-shopping-bag mr-2"></i>
-              <span class="text-sm font-medium">Compras</span>
+              <i class="pi pi-list mr-2"></i>
+              <span class="text-sm font-medium">Listar Ventas</span>
             </a>
           </li>
         </ul>
-      </div>
+      </li>
 
-      <!-- Footer -->
-      <div class="mt-auto">
-        <hr class="mx-3 mb-3 border-t border-surface" />
-        <div class="m-3 flex items-center gap-2 rounded p-3 text-color">
-          <p-avatar label="U" shape="circle" />
-          <span class="text-sm font-bold">Usuario</span>
-        </div>
-      </div>
+      <!-- Compras -->
+      <li>
+        <a
+          routerLink="/compras"
+          class="flex cursor-pointer items-center rounded p-3 text-color no-underline transition-colors duration-150 hover:bg-primary/10 hover:text-primary"
+        >
+          <i class="pi pi-shopping-bag mr-2"></i>
+          <span class="text-sm font-medium">Compras</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Footer -->
+  <div class="mt-auto">
+    <hr class="mx-3 mb-3 border-t border-surface" />
+    <div class="m-3 flex items-center gap-2 rounded p-3 text-color">
+      <span
+        class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-contrast"
+      >
+        U
+      </span>
+      <span class="text-sm font-bold">Usuario</span>
     </div>
-  </ng-template>
-</p-drawer>
+  </div>
+</aside>
