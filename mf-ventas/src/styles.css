@@ -5,6 +5,10 @@
 @import 'tailwindcss';
 @plugin 'tailwindcss-primeui';
 
+/* Alinea el prefijo `dark:` de Tailwind con el selector .app-dark del tema
+   (por defecto Tailwind usa prefers-color-scheme del sistema operativo). */
+@custom-variant dark (&:where(.app-dark, .app-dark *));
+
 @import 'primeicons/primeicons.css';
 @import '@fontsource-variable/geist/index.css';
 
