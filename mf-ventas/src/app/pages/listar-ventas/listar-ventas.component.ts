@@ -1,14 +1,29 @@
-import { CommonModule } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { CardModule } from 'primeng/card';
+import { TagModule } from 'primeng/tag';
+import { Tag } from 'primeng/tag';
+
+type EstadoVenta = 'Al día' | 'Atrasado' | 'Cancelado';
+
+interface Venta {
+  producto: string;
+  total: number;
+  cuotas: number;
+  montoCuota: number;
+  estado: EstadoVenta;
+  fecha: Date;
+  imagenUrl: string;
+}
 
 @Component({
   selector: 'app-listar-ventas',
-  imports: [CommonModule],
+  imports: [DecimalPipe, DatePipe, CardModule, TagModule],
   templateUrl: './listar-ventas.component.html',
   styleUrl: './listar-ventas.component.scss',
 })
 export class ListarVentasComponent {
-  ventas = [
+  readonly ventas: Venta[] = [
     {
       producto: 'Laptop HP 14"',
       total: 1450.0,
@@ -46,4 +61,15 @@ export class ListarVentasComponent {
       imagenUrl: 'producto4.jpg',
     },
   ];
+
+  severidad(estado: EstadoVenta): Tag['severity'] {
+    switch (estado) {
+      case 'Al día':
+        return 'success';
+      case 'Atrasado':
+        return 'warn';
+      case 'Cancelado':
+        return 'secondary';
+    }
+  }
 }
